@@ -102,17 +102,8 @@ xdg-open $1
 
 
 fixchmod(){
-cd ~/
-#HomeDirectory is Permission 755
-#.ssh/* Directory is Permission 744 
-sudo chmod 744 ~/.ssh -R
-sudo chmod 644 ~/.ssh/config
-#id_rsa is Permission 600
-for publickey in `\find ~/.ssh/ -name 'id_rsa.pub'`; do
-	chmod 600 $publickey
-done
-for secretkey in `\find ~/.ssh/ -name 'id_rsa'`; do
-	chmod 600 $secretkey
-done
+sudo chmod 755 ~
+sudo chmod 755 ~/.ssh/../
+sudo chmod 700 ~/.ssh -R
 }
 
