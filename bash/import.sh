@@ -112,8 +112,11 @@ curl https://github.com/$1 | awk '/<svg.+class="js-calendar-graph-svg"/,/svg>/' 
 browse(){
 xdg-open $1
 }
-
-
+startnginxandphpfpm(){
+  sudo /etc/init.d/nginx   start
+  sudo /etc/init.d/php-fpm start
+  xdg-open http://127.0.0.1/
+}
 fixchmod(){
 sudo chmod 755 ~
 sudo chmod 755 ~/.ssh/../
