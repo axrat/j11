@@ -28,6 +28,19 @@ dict(){
 createsshkey(){
 ssh-keygen -t rsa -C ""
 }
+createsshkeyauto(){
+expect -c "
+set timeout 10
+spawn ssh-keygen -t rsa -C \"\"
+expect -re \"Enter file in which to save the key\ (.\*\):\"
+send \"\n\"
+expect \"Enter passphrase \(empty for no passphrase\):\"
+send \"\n\"
+expect \"Enter same passphrase again:\"
+send \"\n\"
+expect eof exit 0
+"
+}
 #
 hideandseek(){
 git filter-branch -f --index-filter '
