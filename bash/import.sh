@@ -71,9 +71,9 @@ git remote set-url origin $1
 git fetch origin
 git reset --hard origin/master
 }
-config(){
-git config --local user.name onoie
-git config --local user.email onoie3@gmail.com
+gitlocalconfig(){
+git config --local user.name $1
+git config --local user.email $2
 }
 shallowclone(){
 git clone --depth 1 $1
