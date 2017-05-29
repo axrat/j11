@@ -22,7 +22,7 @@ download(){
 }
 #
 dict(){
-	grep $1 ~/risky/bash/gene-utf8.txt -A 1 -wi --color
+	grep $1 /j/bash/gene-utf8.txt -A 1 -wi --color
 }
 #
 createsshkey(){
