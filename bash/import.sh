@@ -112,14 +112,42 @@ curl https://github.com/$1 | awk '/<svg.+class="js-calendar-graph-svg"/,/svg>/' 
 browse(){
 xdg-open $1
 }
-startnginxandphpfpm(){
-  sudo /etc/init.d/nginx   start
-  sudo /etc/init.d/php-fpm start
-  xdg-open http://127.0.0.1/
+nginxandphpfpm(){
+case "$1" in
+  start)
+    sudo /etc/init.d/nginx   start
+    sudo /etc/init.d/php-fpm start
+    xdg-open http://localhost/
+  ;;
+  stop)
+    sudo /etc/init.d/nginx stop
+    sudo /etc/init.d/php-fpm stop
+  ;;
+  kill)
+    sudo killall -KILL nginx
+    sudo killall -KILL php-fpm
+  ;;
+esac
 }
 fixchmod(){
 sudo chmod 755 ~
 sudo chmod 755 ~/.ssh/../
 sudo chmod 700 ~/.ssh -R
+}
+killall(){
+	if [ $# -ne 1 ]; then
+		echo "Require [ProcessName]"
+	else
+		sudo killall -KILL $1
+	fi
+}
+devcopy(){
+sudo df
+echo "Ex) dd if=/dev/sr0 of=/root/dev.iso"
+echo "if path:"
+read DDIF
+echo "of path:"
+read DDOF
+sudo dd if=$DDIF of=$DDOF
 }
 
