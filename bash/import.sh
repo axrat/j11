@@ -150,4 +150,11 @@ echo "of path:"
 read DDOF
 sudo dd if=$DDIF of=$DDOF
 }
-
+cases(){
+mkdir -p case1
+mkdir -p case2
+mkdir -p case3
+touch case1/.gitkeep
+touch case2/.gitkeep
+touch case3/.gitkeep
+}
