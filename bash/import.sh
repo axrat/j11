@@ -1,4 +1,5 @@
 #!/bin/bash
+declare -a jetbrains=("IdeaProjects" "PhpstormProjects" "CLionProjects" "PycharmProjects" "RubymineProjects" "WebstormProjects" "GoglandProjects" "RiderProjects")
 helloworld(){
 	echo "Hello,World!"
 }
@@ -98,7 +99,7 @@ SUBDIR=$(basename $REPO_URL)
 git fetch $REPO_URL/.git refs/heads/master:refs/heads/$SUBDIR
 git filter-branch -f --tree-filter '
 [ -d ${SUBDIR} ] || mkdir -p ${SUBDIR};
-find . -mindepth 1 -maxdepth 1 ! -path ./${SUBDIR} | xargs -i{} mv {} ${SUBDIR}
+find . -mindepth 1 -maxdepth 1 ! -path ./${SUBDIR} | xargs -i{} mv -f {} ${SUBDIR}
 ' $SUBDIR
 git merge --no-ff $SUBDIR
 }
