@@ -159,3 +159,9 @@ touch case1/.gitkeep
 touch case2/.gitkeep
 touch case3/.gitkeep
 }
+launch_maya(){
+	sudo /usr/autodesk/maya2016/bin/maya
+}
+launch_unity(){
+	LD_PRELOAD=/lib/x86_64-linux-gnu/libresolv.so.2 /opt/Unity/Editor/Unity
+}
