@@ -114,15 +114,26 @@ browse(){
 xdg-open $1
 }
 nginxandphpfpm(){
-case "$1" in
-  start)
-    sudo /etc/init.d/nginx   start
-    sudo /etc/init.d/php-fpm start
-    xdg-open http://localhost/
-  ;;
-  stop)
+d_start(){
+  sudo /etc/init.d/nginx   start
+  sudo /etc/init.d/php-fpm start
+}
+d_stop(){
     sudo /etc/init.d/nginx stop
     sudo /etc/init.d/php-fpm stop
+}
+case "$1" in
+  start)
+	d_start
+    xdg-open http://localhost/
+  ;;
+  restart)
+    d_stop
+    sleep 2
+    d_start
+  ;;
+  stop)
+    d_stop
   ;;
   kill)
     sudo killall -KILL nginx
