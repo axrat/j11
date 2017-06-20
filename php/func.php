@@ -23,6 +23,35 @@ class Func{
     public static function allUserDefined() {
         return get_defined_constants(TRUE)['user'];
     }
+    /**
+     * Ex) http://example.com/$base/child/params
+     * @param $base
+     * @return array(child,params)
+     */
+    public static function serviceFacade($base){
+        try {
+            if ($_SERVER["REQUEST_URI"] === $base) {
+                //echo "Index";
+            } else {
+                $child_and_params = str_replace($base, "", $_SERVER["REQUEST_URI"]);
+                if (preg_match('/(.+)\//', $child_and_params, $child)) {
+                    $params = str_replace($child[1]."/", "", $child_and_params);
+                    return array($child[1],$params);
+                } else {
+                    echo "UnknownPattern:[" . $child_and_params . "]";
+                }
+                exit;
+            }
+        } catch (Exception $e) {
+            if (self::isLocalhost()) {
+                echo $e->getMessage() . PHP_EOL;
+            } else {
+                header('Content-Type: text/plain; charset=UTF-8', true, 500);
+                echo("Error Occurred");
+            }
+            exit;
+        }
+    }
     //Helper
     public static function createPDO($db_host, $db_user, $db_pass, $db_name){
         $pdo= new PDO('mysql:dbname='.$db_name.';host='.$db_host, $db_user,$db_pass);

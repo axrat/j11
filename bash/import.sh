@@ -176,3 +176,10 @@ launch_maya(){
 launch_unity(){
 	LD_PRELOAD=/lib/x86_64-linux-gnu/libresolv.so.2 /opt/Unity/Editor/Unity
 }
+download_bitbucket(){
+	if [ $# -ne 3 ]; then
+		echo "Require bitbucket [username],[repouser],[reponame]"
+	else
+		wget --user=$1 --ask-password https://bitbucket.org/$2/$3/get/master.zip
+	fi
+}
