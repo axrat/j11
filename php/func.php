@@ -23,6 +23,9 @@ class Func{
     public static function allUserDefined() {
         return get_defined_constants(TRUE)['user'];
     }
+    public static function escapeHtml($str) {
+        return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+    }
     /**
      * Ex) http://example.com/$base/child/params
      * @param $base
