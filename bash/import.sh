@@ -186,3 +186,6 @@ download_bitbucket(){
 		wget --user=$1 --ask-password https://bitbucket.org/$2/$3/get/master.zip
 	fi
 }
+getZipRootDirectoryName(){
+	unzip -qql $1 | head -n1 | tr -s ' ' | cut -d' ' -f5- | rev | cut -c 2- | rev
+}
