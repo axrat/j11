@@ -4,6 +4,7 @@ use PDO;
 use mysqli;
 use DateTime;
 use DateTimeZone;
+use ZipArchive;
 
 class Func{
     protected function __construct() { }
@@ -26,6 +27,70 @@ class Func{
     public static function escapeHtml($str) {
         return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
     }
+    public static function deltree($dir) {
+        if($handle = opendir("$dir")) {
+            while(false !== ($item = readdir($handle))) {
+                if($item != "." && $item != "..") {
+                    if(is_dir("$dir/$item")) {
+                        self::deltree("$dir/$item");
+                    }else{
+                        unlink("$dir/$item");
+                        //echo " removing $dir/$item<br>\n";
+                    }
+                }
+            }
+            closedir($handle);
+            rmdir($dir);
+            //echo "removing $dir<br/>\n";
+        }
+    }
+    public static function cptree($dir, $dst) {
+        if (!file_exists($dst)) if(!mkdir($dst, 0755, true)) return false;
+        if (!is_dir($dir) || is_link($dir)) return copy($dir, $dst); // should not happen
+        $files = array_diff(scandir($dir), array('.','..'));
+        $sep = (substr($dir, -1) == DIRECTORY_SEPARATOR ? '' : DIRECTORY_SEPARATOR);
+        $dsp = (substr($dst, -1) == DIRECTORY_SEPARATOR ? '' : DIRECTORY_SEPARATOR);
+        foreach ($files as $file) {
+            (is_dir("$dir$sep$file")) ? self::cptree("$dir$sep$file", "$dst$dsp$file") : copy("$dir$sep$file", "$dst$dsp$file");
+        }
+        return true;
+    }
+    public static function unzip($zip_path, $unzip_dir) {
+        $zip = new ZipArchive();
+        if( $zip->open($zip_path) === true ) {
+            $zip->extractTo($unzip_dir);
+            $stat = $zip->statIndex(0);
+            $folder = $stat['name'];
+            $zip->close();
+            return $folder;
+        }else {
+            die('ZIP not supported on this server!');
+        }
+    }
+    public static function curl_download($url,$destination,$username=null,$password=null) {
+        try{
+            $fp = fopen($destination, "w");
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+            if(isset($username)&&isset($password)){
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+                curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
+            }
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_FILE, $fp);
+            curl_exec($ch);
+        }catch (Exception $ex){
+            throw new Exception('Download Exception', 500);
+        }finally{
+            if ($ch != null) curl_close($ch);
+            if ($fp != null) fclose($fp);
+        }
+    }
+
     /**
      * Ex) http://example.com/$base/child/params
      * @param $base
