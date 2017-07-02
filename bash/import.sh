@@ -22,10 +22,6 @@ download(){
 	fi
 }
 #
-dict(){
-	grep $1 /j11/bash/gene-utf8.txt -A 1 -wi --color
-}
-#
 createsshkey(){
 ssh-keygen -t rsa -C ""
 }
