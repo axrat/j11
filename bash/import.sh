@@ -1,31 +1,33 @@
 #!/bin/bash
 killall(){
-	if [ $# -ne 1 ]; then
-		echo "Require [ProcessName]"
-	else
-		sudo killall -KILL $1
-	fi
+  if [ $# -ne 1 ]; then
+    echo "Require [ProcessName]"
+  else
+    sudo killall -KILL $1
+  fi
 }
+LINES=$(tput lines)
+COLUMNS=$(tput cols)
 helloworld(){
-	echo "Hello,World!"
+  echo "Hello,World!"
 }
 ks(){
-	echo "Oops!"
+  echo "Oops!"
 }
 shutdownlater(){
-	sudo shutdown -h +300
+  sudo shutdown -h +300
 }
 rundir(){
-	echo $(cd $(dirname $(readlink $0 || echo $0));pwd)
+  echo $(cd $(dirname $(readlink $0 || echo $0));pwd)
 }
 fromdir(){
-	echo $(cd $(dirname $BASH_SOURCE); pwd)
+  echo $(cd $(dirname $BASH_SOURCE); pwd)
 }
 #
 download(){
-	if [ ! -e ${1##*/} ]; then
-		wget $1 --trust-server-names
-	fi
+  if [ ! -e ${1##*/} ]; then
+    wget $1 --trust-server-names
+  fi
 }
 #
 createsshkey(){
@@ -286,7 +288,7 @@ extract(){
 }
 hr(){
   CHAR=${1:-"-"}
-  for i in `seq 1 $COLUMNS`
+  for i in `seq 1 $(tput cols)`
   do
     printf "${CHAR}";
   done
