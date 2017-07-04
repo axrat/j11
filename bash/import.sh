@@ -14,6 +14,12 @@ helloworld(){
 ks(){
   echo "Oops!"
 }
+ssh_github(){
+  ssh -T git@github.org
+}
+ssh_bitbucket(){
+  ssh -T git@bitbucket.org
+}
 shutdownlater(){
   sudo shutdown -h +300
 }
