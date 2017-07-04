@@ -305,3 +305,12 @@ createJetBrainsDirectory(){
     echo "mkdir -p ${jetbrains[i]}"
   }
 }
+getDirSize(){
+  if [ $# -ne 1 ]; then
+    echo "Require [DirectoryName]"
+  else
+    du -sh $1
+  fi
+}
+
+
