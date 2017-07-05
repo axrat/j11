@@ -15,7 +15,7 @@ ks(){
   echo "Oops!"
 }
 ssh_github(){
-  ssh -T git@github.org
+  ssh -T git@github.com
 }
 ssh_bitbucket(){
   ssh -T git@bitbucket.org
