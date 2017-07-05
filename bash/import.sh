@@ -319,3 +319,11 @@ fastpush(){
 fastreset(){
   git reset --hard origin/master
 }
+fastremote(){
+  if [ $# -ne 3 ]; then
+    echo "Require[domain],[repouser],[reponame]"
+  else
+    git remote add origin git@$1:$2/$3.git
+  fi
+}
+
