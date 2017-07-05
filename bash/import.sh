@@ -313,4 +313,9 @@ getDirSize(){
   fi
 }
 
-
+fastpush(){
+  git push --set-upstream origin master
+}
+fastreset(){
+  git reset --hard origin/master
+}
