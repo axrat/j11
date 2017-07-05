@@ -14,10 +14,10 @@ helloworld(){
 ks(){
   echo "Oops!"
 }
-ssh_github(){
+ssh-github(){
   ssh -T git@github.com
 }
-ssh_bitbucket(){
+ssh-bitbucket(){
   ssh -T git@bitbucket.org
 }
 shutdownlater(){
@@ -177,13 +177,13 @@ touch case1/.gitkeep
 touch case2/.gitkeep
 touch case3/.gitkeep
 }
-launch_maya(){
+launch-maya(){
 	sudo /usr/autodesk/maya2016/bin/maya
 }
-launch_unity(){
+launch-unity(){
 	LD_PRELOAD=/lib/x86_64-linux-gnu/libresolv.so.2 /opt/Unity/Editor/Unity
 }
-download_bitbucket(){
+download-bitbucket(){
   if [ $# -ne 3 ]; then
     echo "Require bitbucket [username],[repouser],[reponame]"
   else
@@ -200,7 +200,7 @@ togif(){
     ffmpeg -i "$1" -an -r 24 "$(pwd)/${$(basename $1)%.*}.gif"
   fi
 }
-base64 () {
+base64(){
   #usage cat image.gif | base64 > img.css
   w=''
   case "${1:-}" in
@@ -315,6 +315,9 @@ getDirSize(){
 
 fastpush(){
   git push --set-upstream origin master
+}
+fastpull(){
+  git pull origin master --depth=1
 }
 fastreset(){
   git reset --hard origin/master
