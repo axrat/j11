@@ -299,7 +299,7 @@ hr(){
     printf "${CHAR}";
   done
 }
-declare -a jetbrains=("IdeaProjects" "PhpstormProjects" "CLionProjects" "PycharmProjects" "RubymineProjects" "WebstormProjects" "GoglandProjects" "RiderProjects")
+declare -a jetbrains=("IdeaProjects" "PhpstormProjects" "CLionProjects" "PycharmProjects" "RubymineProjects" "WebstormProjects" )
 createJetBrainsDirectory(){
   for ((i = 0; i < ${#jetbrains[@]}; i++)) {
     echo "mkdir -p ${jetbrains[i]}"
