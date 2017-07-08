@@ -123,16 +123,16 @@ curl https://github.com/$1 | awk '/<svg.+class="js-calendar-graph-svg"/,/svg>/' 
 browse(){
 xdg-open $1
 }
-nginxandphpfpmfcgiwrap(){
+nginxandphpfpm(){
   d_start(){
     sudo /etc/init.d/nginx   start
     sudo /etc/init.d/php-fpm start
-    sudo /etc/init.d/fcgiwrap start
+    #sudo /etc/init.d/fcgiwrap start
   }
   d_stop(){
     sudo /etc/init.d/nginx stop
     sudo /etc/init.d/php-fpm stop
-    sudo /etc/init.d/fcgiwrap stop
+    #sudo /etc/init.d/fcgiwrap stop
   }
   case "$1" in
     start)
@@ -150,7 +150,7 @@ nginxandphpfpmfcgiwrap(){
     kill)
       sudo killall -KILL nginx
       sudo killall -KILL php-fpm
-      sudo killall -KILL fcgiwrap
+      #sudo killall -KILL fcgiwrap
     ;;
   esac
 }
