@@ -113,10 +113,6 @@ find . -mindepth 1 -maxdepth 1 ! -path ./${SUBDIR} | xargs -i{} mv -f {} ${SUBDI
 ' $SUBDIR
 git merge --no-ff $SUBDIR
 }
-fastcommit(){
-git commit --allow-empty -m "fast commit"
-git push
-}
 creategithubgrasssvg(){
 curl https://github.com/$1 | awk '/<svg.+class="js-calendar-graph-svg"/,/svg>/' | sed -e 's/<svg/<svg xmlns="http:\/\/www.w3.org\/2000\/svg"/' > $1.svg
 }
@@ -154,12 +150,20 @@ nginxandphpfpm(){
     ;;
   esac
 }
-fixchmod(){
-sudo chmod 755 ~
-sudo chmod 755 ~/.ssh/../
-sudo chmod 700 ~/.ssh -R
+chmod-r(){
+  if [ $# -ne 3 ]; then
+    echo "Require [f/d],[Permission],[path] "
+  else
+    sudo find $3 -type $1 -exec sudo chmod $2 {} +
+  fi
 }
-
+forDotSSH(){
+  sudo chmod 755 ~
+  sudo chmod 755 ~/.ssh/../
+  sudo chmod 755 ~/.ssh/host/
+  chmod-r d 744 ~/.ssh/
+  chmod-r f 600 ~/.ssh/
+}
 devcopy(){
 sudo df
 echo "Ex) dd if=/dev/sr0 of=/root/dev.iso"
@@ -312,7 +316,17 @@ getDirSize(){
     du -sh $1
   fi
 }
-
+fastclone(){
+  if [ $# -ne 3 ]; then
+    echo "Require[domain],[repouser],[reponame]"
+  else
+    git clone git@$1:$2/$3.git
+  fi
+}
+fastcommit(){
+git commit --allow-empty -m "fast commit"
+git push
+}
 fastpush(){
   git push --set-upstream origin master
 }
