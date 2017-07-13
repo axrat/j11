@@ -367,6 +367,10 @@ expect \"Are you sure you want to continue connecting (yes/no)?\" {
 interact
 "
 }
+gtk-input(){
+  VAR=$(zenity --entry --text="input:")
+  echo $VAR
+}
 exp-sudo(){
 if [ $# -ne 2 ]; then
   echo "Require [command],[password]"
@@ -382,4 +386,15 @@ else
     interact
   "
 fi
+}
+clone(){
+  if [ $# -ne 5 ]; then
+    echo "Require [RepositoryHost]:[Username]/[RepositoryName].git"
+    echo "git local [GitUsername] [GitEmail]"
+  else
+    git clone git@$1:$2/$3.git
+    cd $3
+    git config --local user.name "$4"
+    git config --local user.email "$5"
+  fi
 }
