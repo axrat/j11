@@ -343,4 +343,43 @@ fastremote(){
     git remote add origin git@$1:$2/$3.git
   fi
 }
-
+exp-ssh(){
+if [ $# -ne 3 ]; then
+  echo "require user/host/pass"
+  exit 1
+fi
+USER=$1
+HOST=$2
+PASS=$3
+expect -c "
+#log_file sshexp.log
+set timeout -1
+spawn ssh -l $USER $HOST
+expect \"Are you sure you want to continue connecting (yes/no)?\" {
+    send \"yes\n\"
+    expect \"$USER@$HOST's password:\"
+    send \"$PASS\n\"
+} \"$USER@$HOST's password:\" {
+    send \"$PASS\n\"
+} \"Permission denied (publickey,gssapi-keyex,gssapi-with-mic).\" {
+    exit
+}
+interact
+"
+}
+exp-sudo(){
+PASS=$1
+CMD=$2
+if [ $# -ne 2 ]; then
+  echo "require [user],[password]"
+  exit 1
+fi
+expect -c "
+set timeout -1
+spawn sudo $CMD
+expect \"assword\" {
+    send \"$PASS\n\"
+}
+interact
+"
+}
