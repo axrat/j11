@@ -158,11 +158,8 @@ chmod-r(){
   fi
 }
 forDotSSH(){
-  sudo chmod 755 ~
-  sudo chmod 755 ~/.ssh/../
-  sudo chmod 755 ~/.ssh/host/
-  chmod-r d 744 ~/.ssh/
-  chmod-r f 600 ~/.ssh/
+  sudo find ~/.ssh/ -type d -exec sudo chmod 755 {} +
+  sudo find ~/.ssh/ -type f -exec sudo chmod 600 {} +
 }
 devcopy(){
 sudo df
