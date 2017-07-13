@@ -368,18 +368,18 @@ interact
 "
 }
 exp-sudo(){
-PASS=$1
-CMD=$2
 if [ $# -ne 2 ]; then
-  echo "require [user],[password]"
-  exit 1
+  echo "Require [command],[password]"
+else
+  CMD=$1
+  PASS=$2
+  expect -c "
+    set timeout -1
+    spawn sudo $CMD
+    expect \"assword\" {
+      send \"$PASS\n\"
+    }
+    interact
+  "
 fi
-expect -c "
-set timeout -1
-spawn sudo $CMD
-expect \"assword\" {
-    send \"$PASS\n\"
-}
-interact
-"
 }
