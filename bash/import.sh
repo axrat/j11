@@ -184,7 +184,14 @@ launch-maya(){
 launch-unity(){
 	LD_PRELOAD=/lib/x86_64-linux-gnu/libresolv.so.2 /opt/Unity/Editor/Unity
 }
-download-bitbucket(){
+wget-github-public(){
+  if [ $# -ne 2 ]; then
+    echo "Require bitbucket [repouser],[reponame]"
+  else
+    wget --no-check-certificate https://github.com/$1/$2/archive/master.zip
+  fi
+}
+wget-bitbucket(){
   if [ $# -ne 3 ]; then
     echo "Require bitbucket [username],[repouser],[reponame]"
   else
@@ -400,6 +407,9 @@ cmakeclean(){
   rm cmake_install.cmake
   rm -r CMakeFiles
   rm Makefile
+}
+cmakeuninstall(){
+  xargs rm < install_manifest.txt
 }
 getLastCommitMessage(){
   if [ $# -ne 3 ]; then
