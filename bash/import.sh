@@ -395,3 +395,24 @@ clone(){
     git config --local user.email "$5"
   fi
 }
+cmakeclean(){
+  rm CMakeCache.txt
+  rm cmake_install.cmake
+  rm -r CMakeFiles
+  rm Makefile
+}
+getLastCommitMessage(){
+  if [ $# -ne 3 ]; then
+    echo "require [host],[user],[repository]"
+    exit 1
+  fi
+  HOST=$1
+  USER=$2
+  REPO=$3
+  curl https://$HOST/$USER/$REPO \
+   | sed -n -e "/<div class=\"commit-tease js-details-container Details\">/,/<\/div>/p" \
+   | grep title \
+   | awk '{print substr($0, index($0, ">"))}' \
+   | awk '{sub("<.*", "");print $0;}' \
+   | cut -c 2-
+}
