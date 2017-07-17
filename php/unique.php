@@ -15,7 +15,7 @@ class Unique{
         return static::$instance;
     }
     static function renderFullReference(){
-        renderReference();
+        self::renderReference();
         echo '<script src="//rawgit.com/TransAssist/cdn/master/analytics/onoie.com.js"></script>';
     }
     static function renderReference(){
