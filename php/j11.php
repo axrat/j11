@@ -3,6 +3,7 @@
 namespace Onoie;
 
 use Exception;
+use SplFileInfo;
 use DateTime;
 use DateTimeZone;
 use ZipArchive;
