@@ -1,6 +1,6 @@
 <?php
 
-namespace Onoie\J;
+namespace Onoie;
 
 use Exception;
 use DateTime;
