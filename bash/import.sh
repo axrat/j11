@@ -426,3 +426,7 @@ getLastCommitMessage(){
    | awk '{sub("<.*", "");print $0;}' \
    | cut -c 2-
 }
+dockerexec(){
+sudo docker exec -it $1 /bin/bash
+}
+

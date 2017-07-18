@@ -1,4 +1,1 @@
-<?php
-require_once ("func.php");
-require_once ("unique.php");
-?>
+<?php require_once ("j11.php"); ?>

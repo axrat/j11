@@ -1,12 +1,12 @@
 <?php
+
 namespace Onoie\J;
-use PDO;
-use mysqli;
+
 use DateTime;
 use DateTimeZone;
 use ZipArchive;
 
-class Func{
+class J11{
     protected function __construct() { }
     public static function getInstance() {
         if (static::$instance === NULL) {
@@ -119,16 +119,6 @@ class Func{
             }
             exit;
         }
-    }
-    //Helper
-    public static function createPDO($db_host, $db_user, $db_pass, $db_name){
-        $pdo= new PDO('mysql:dbname='.$db_name.';host='.$db_host, $db_user,$db_pass);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        return $pdo;
-    }
-    public static function createMysqli($db_host, $db_user, $db_pass, $db_name){
-        return new mysqli($db_host, $db_user, $db_pass, $db_name);
     }
     public static function echoTitleChangeScript($title=""){
         echo "<script>document.title='".$title."';</script>";
