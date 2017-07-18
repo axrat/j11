@@ -2,6 +2,7 @@
 
 namespace Onoie\J;
 
+use Exception;
 use DateTime;
 use DateTimeZone;
 use ZipArchive;

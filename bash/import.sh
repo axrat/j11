@@ -1,4 +1,5 @@
 #!/bin/bash
+#
 killall(){
   if [ $# -ne 1 ]; then
     echo "Require [ProcessName]"
