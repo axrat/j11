@@ -28,6 +28,34 @@ class J11{
     public static function escapeHtml($str) {
         return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
     }
+    public static function echoDirTree($path = './',$base = null){
+        if ($handle = opendir($path)){
+            echo '<ul style="list-style: none;">';
+            $queue = array();
+            while (false !== ($file = readdir($handle))){
+                if (is_dir($path.$file) && $file != '.' && $file !='..') {
+                    self::printSubDir($file, $path, $queue, $base);
+                } else if ($file != '.' && $file !='..') {
+                    $queue[] = $file;
+                }
+            }
+            self::printQueue($queue, $path, $base);
+            echo '</ul>';
+        }
+    }
+    public static function printQueue($queue,$path,$base){
+        foreach ($queue as $file){
+            self::printFile($file, $path, $base);
+        }
+    }
+    public static function printFile($file,$path,$base){
+        echo "<li><a href=\"".($base==null?$path:$base).$file."\">$file</a></li>\n";
+    }
+    public static function printSubDir($dir,$path,$base){
+        echo "<li><span class=\"dir\">$dir</span>";
+        self::echoDirTree($path.$dir."/", $base);
+        echo "</li>\n";
+    }
     public static function deltree($dir) {
         if($handle = opendir("$dir")) {
             while(false !== ($item = readdir($handle))) {
@@ -152,13 +180,14 @@ class J11{
             return $e->getMessage() . PHP_EOL;
         }
     }
-    function showLocalImage($relative_png_image_path){
-        if (file_exists($relative_png_image_path)) {
-            $fp   = fopen($relative_png_image_path,'rb');
-            $size = filesize($relative_png_image_path);
+    function showLocalImage($image_path){
+        if (file_exists($image_path)) {
+            $fp   = fopen($image_path,'rb');
+            $size = filesize($image_path);
             $img  = fread($fp, $size);
+            $info = new SplFileInfo($image_path);
             fclose($fp);
-            header('Content-Type: image/png');
+            header('Content-Type: image/'.$info->getExtension());
             echo $img;
         }else{
             self::getImage404();
