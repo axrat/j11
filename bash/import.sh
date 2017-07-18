@@ -321,27 +321,27 @@ getDirSize(){
     du -sh $1
   fi
 }
-fastclone(){
+fclone(){
   if [ $# -ne 3 ]; then
     echo "Require[domain],[repouser],[reponame]"
   else
     git clone git@$1:$2/$3.git
   fi
 }
-fastcommit(){
+fcommit(){
 git commit --allow-empty -m "fast commit"
 git push
 }
-fastpush(){
+fpush(){
   git push --set-upstream origin master
 }
-fastpull(){
+fpull(){
   git pull origin master --depth=1
 }
-fastreset(){
+freset(){
   git reset --hard origin/master
 }
-fastremote(){
+fremote(){
   if [ $# -ne 3 ]; then
     echo "Require[domain],[repouser],[reponame]"
   else
