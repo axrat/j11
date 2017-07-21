@@ -29,30 +29,30 @@ class J11{
     public static function escapeHtml($str) {
         return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
     }
-    public static function echoDirTree($path = './',$base = null){
+    public static function echoDirTree($path,$base = null){
         if ($handle = opendir($path)){
             echo '<ul style="list-style: none;">';
             $queue = array();
             while (false !== ($file = readdir($handle))){
                 if (is_dir($path.$file) && $file != '.' && $file !='..') {
-                    self::printSubDir($file, $path, $queue, $base);
+                    self::printSubDir($base,$file, $path, $queue);
                 } else if ($file != '.' && $file !='..') {
                     $queue[] = $file;
                 }
             }
-            self::printQueue($queue, $path, $base);
+            self::printQueue($base,$queue, $path);
             echo '</ul>';
         }
     }
-    public static function printQueue($queue,$path,$base){
+    public static function printQueue($base,$queue,$path){
         foreach ($queue as $file){
-            self::printFile($file, $path, $base);
+            self::printFile($base,$file, $path);
         }
     }
-    public static function printFile($file,$path,$base){
+    public static function printFile($base,$file,$path){
         echo "<li><a href=\"".($base==null?$path:$base).$file."\">$file</a></li>\n";
     }
-    public static function printSubDir($dir,$path,$base){
+    public static function printSubDir($base,$dir,$path){
         echo "<li><span class=\"dir\">$dir</span>";
         self::echoDirTree($path.$dir."/", $base);
         echo "</li>\n";
@@ -206,6 +206,7 @@ class J11{
 //<meta property="fb:app_id" content="App ID" />
 //<meta property="article:publisher" content="FacebookPageURL" />
         echo <<< EOF
+
 <meta property="og:title" content="$title" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="$url" />
@@ -218,6 +219,7 @@ class J11{
 <meta name="twitter:url" content="$url" />
 <meta name="twitter:description" content="$description" />
 <meta name="twitter:image" content="$img" />
+
 EOF;
     }
     public static function first(){
@@ -225,6 +227,7 @@ EOF;
 
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 

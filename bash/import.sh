@@ -96,13 +96,10 @@ USERNAME=onoie
 USEREMAIL=onoie3@gmail.com
 git filter-branch -f --env-filter "GIT_AUTHOR_NAME='${USERNAME}'; GIT_AUTHOR_EMAIL='${USEREMAIL}'; GIT_COMMITTER_NAME='${USERNAME}'; GIT_COMMITTER_EMAIL='${USEREMAIL}';" HEAD
 }
-commitcount(){
-git shortlog -s -n
-}
 repositorymerge(){
 if [ $# -ne 1 ]; then
   echo "require local target repository path" 1>&2
-  echo "Ex) [~/whisky/repos/path]" 1>&2
+  echo "Ex) [~/repos/repo]" 1>&2
   exit 1
 fi
 REPO_URL=$1
@@ -112,7 +109,7 @@ git filter-branch -f --tree-filter '
 [ -d ${SUBDIR} ] || mkdir -p ${SUBDIR};
 find . -mindepth 1 -maxdepth 1 ! -path ./${SUBDIR} | xargs -i{} mv -f {} ${SUBDIR}
 ' $SUBDIR
-git merge --no-ff $SUBDIR
+git merge --allow-unrelated-histories --no-ff $SUBDIR
 }
 creategithubgrasssvg(){
 curl https://github.com/$1 | awk '/<svg.+class="js-calendar-graph-svg"/,/svg>/' | sed -e 's/<svg/<svg xmlns="http:\/\/www.w3.org\/2000\/svg"/' > $1.svg
@@ -332,6 +329,9 @@ fcommit(){
 git commit --allow-empty -m "fast commit"
 git push
 }
+fcount(){
+git shortlog -s -n
+}
 fpush(){
   git push --set-upstream origin master
 }
@@ -430,4 +430,12 @@ getLastCommitMessage(){
 dockerexec(){
 sudo docker exec -it $1 /bin/bash
 }
-
+dockerrminone(){
+sudo docker images | awk '/<none/{print $3}' | xargs sudo docker rmi
+}
+dockerstopall(){
+sudo docker stop $(sudo docker ps -a -q)
+}
+dockerrmall(){
+sudo docker rm $(sudo docker ps -a -q)
+}
