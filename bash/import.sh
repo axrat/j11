@@ -69,7 +69,7 @@ git checkout --orphan tmp
 git commit -m "override"
 git checkout -B master
 git branch -d tmp
-git push -f
+git push -f --set-upstream origin master
 }
 seturl(){
 git remote add     origin $1
@@ -439,3 +439,26 @@ sudo docker stop $(sudo docker ps -a -q)
 dockerrmall(){
 sudo docker rm $(sudo docker ps -a -q)
 }
+herokuremoteadd(){
+  if [ $# -ne 1 ]; then
+    echo "Require [reponame]"
+  else
+	git remote add heroku https://git.heroku.com/$1.git
+  fi
+}
+sudopostgres(){
+sudo -i -u postgres
+}
+crossorigincheck(){
+  if [ $# -ne 1 ]; then
+    echo "Require [http://example.com]"
+  else
+    curl -H "Origin: ${1}" \
+      -H "Access-Control-Request-Method: POST" \
+      -H "Access-Control-Request-Headers: X-Requested-With" \
+      -X OPTIONS \
+      --verbose https://www.googleapis.com/discovery/v1/apis?fields=
+  fi
+}
+
+
