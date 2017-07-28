@@ -460,5 +460,28 @@ crossorigincheck(){
       --verbose https://www.googleapis.com/discovery/v1/apis?fields=
   fi
 }
-
-
+frevert(){
+git reset --soft HEAD^
+}
+getGithubPublicRepositoryViaAPI(){
+curl https://api.github.com/users/onoie/repos
+}
+getGithubPrivateRepositoryViaAPI(){
+ACCESS_TOKEN=$1
+ORG=$2
+curl -u :${ACCESS_TOKEN} https://api.github.com/orgs/$ORG{}/repos
+curl -H 'Authorization: token ${ACCESS_TOKEN}' https://api.github.com/orgs/$ORG/repos
+curl 'https://api.github.com/orgs/${ORG}/repos?access_token=${ACCESS_TOKEN}'
+}
+skelMakefile(){
+cat >> Makefile << 'EOF'
+#!/usr/bin/make -f
+RUN := /bin/bash
+all:
+	@echo make run
+run:
+	$(RUN) \
+	--version
+EOF
+chmod +x Makefile
+}
