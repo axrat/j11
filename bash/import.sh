@@ -506,3 +506,20 @@ ubuntuoraclejdkinstall(){
  sudo apt-get update
  sudo apt-get install oracle-java8-installer
 }
+checkdirectorysize(){
+  if [ $# -ne 1 ]; then
+    echo "Require [DirectoryPath]"
+  else
+    printf $(find $1 -type f -printf "%s\n" | awk '{ sum += $1; } END { print sum; }')
+    printf "byte\n"
+  fi
+}
+installtrans(){
+#https://github.com/soimort/translate-shell
+DIR=/usr/local/bin/
+if [ ! -e ${DIR}trans ]; then
+  wget git.io/trans
+  chmod +x ./trans
+  sudo mv ./trans $DIR
+fi
+}
