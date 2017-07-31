@@ -15,6 +15,9 @@ helloworld(){
 ks(){
   echo "Oops!"
 }
+meke(){
+  echo "Nyan!"
+}
 ssh-github(){
   ssh -T git@github.com
 }
@@ -476,12 +479,30 @@ curl 'https://api.github.com/orgs/${ORG}/repos?access_token=${ACCESS_TOKEN}'
 skelMakefile(){
 cat >> Makefile << 'EOF'
 #!/usr/bin/make -f
+define README
+# README
+endef
+export README
 RUN := /bin/bash
 all:
-	@echo make run
-run:
+	@echo make readme
+readme:
+	@echo "$$README"
+version:
 	$(RUN) \
 	--version
 EOF
 chmod +x Makefile
+}
+gitrmremotebranch(){
+  if [ $# -ne 1 ]; then
+    echo "Require [branch]"
+  else
+    git push --delete origin $1
+  fi
+}
+ubuntuoraclejdkinstall(){
+ sudo add-apt-repository ppa:webupd8team/java
+ sudo apt-get update
+ sudo apt-get install oracle-java8-installer
 }
