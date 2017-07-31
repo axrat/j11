@@ -1,0 +1,12 @@
+# ctrl+o close
+# ctrl+w Search (Next -> ctrl+w)
+# ctrl+^ SelectAreaStart
+# ctrl+k Cut
+# ctrl+u Paste
+
+set const
+set nowrap
+set softwrap
+set smooth
+
+include /usr/local/whisky/dotfiles/.nano/syntax/ALL.nanorc
