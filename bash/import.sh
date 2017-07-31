@@ -523,3 +523,11 @@ if [ ! -e ${DIR}trans ]; then
   sudo mv ./trans $DIR
 fi
 }
+installnanorc(){
+rm -rf ~/.nano
+git clone https://github.com/nanorc/nanorc.git
+cd nanorc
+make install
+cd ..
+sudo rm -rf nanorc
+}

@@ -9,4 +9,4 @@ set nowrap
 set softwrap
 set smooth
 
-include /usr/local/whisky/dotfiles/.nano/syntax/ALL.nanorc
+include ~/.nano/syntax/ALL.nanorc
