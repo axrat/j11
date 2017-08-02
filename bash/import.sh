@@ -9,9 +9,7 @@ killall(){
 }
 LINES=$(tput lines)
 COLUMNS=$(tput cols)
-fx(){ 
-  sudo wget $1 && sudo chmod +x ${1##*/} && sudo ./${1##*/}
-}
+export J="$(cd $(dirname $BASH_SOURCE); pwd)/import.sh"
 helloworld(){
   echo "Hello,World!"
 }
@@ -20,6 +18,12 @@ ks(){
 }
 meke(){
   echo "Nyan!"
+}
+require(){
+ echo "nano curl wget git expect zip"
+}
+fx(){ 
+  sudo wget $1 && sudo chmod +x ${1##*/} && sudo ./${1##*/}
 }
 ssh-github(){
   ssh -T git@github.com
@@ -544,4 +548,10 @@ sudo ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 ubuntuinstallntp(){
 sudo apt-get install ntp
 sudo /etc/init.d/ntp start
+}
+rmcomment(){
+grep -v -e '^\s*#' -e '^\s*$' $1
+}
+bkup(){
+\cp -rf $1 $1.org
 }
