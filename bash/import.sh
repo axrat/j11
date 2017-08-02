@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+alias s='git status'
 killall(){
   if [ $# -ne 1 ]; then
     echo "Require [ProcessName]"
@@ -9,6 +9,9 @@ killall(){
 }
 LINES=$(tput lines)
 COLUMNS=$(tput cols)
+fx(){ 
+  sudo wget $1 && sudo chmod +x ${1##*/} && sudo ./${1##*/}
+}
 helloworld(){
   echo "Hello,World!"
 }
@@ -530,4 +533,15 @@ cd nanorc
 make install
 cd ..
 sudo rm -rf nanorc
+}
+phpconfigurecheck(){
+php -i  | grep './configure'
+}
+updatelocaletime(){
+sudo cp /etc/localtime /etc/localtime.org
+sudo ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+}
+ubuntuinstallntp(){
+sudo apt-get install ntp
+sudo /etc/init.d/ntp start
 }
