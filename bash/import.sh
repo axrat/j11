@@ -20,7 +20,7 @@ meke(){
   echo "Nyan!"
 }
 require(){
- echo "nano curl wget git expect zip"
+  echo "nano curl wget git expect zip nginx"
 }
 fx(){ 
   sudo wget $1 && sudo chmod +x ${1##*/} && sudo ./${1##*/}
@@ -559,5 +559,6 @@ checkglobalip(){
 curl inet-ip.info
 }
 checkproxy(){
-curl inet-ip.info -x localhost:3128
+HOST=${1:-localhost}
+curl inet-ip.info -x $HOST:3128
 }
