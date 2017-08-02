@@ -555,3 +555,9 @@ grep -v -e '^\s*#' -e '^\s*$' $1
 bkup(){
 \cp -rf $1 $1.org
 }
+checkglobalip(){
+curl inet-ip.info
+}
+checkproxy(){
+curl inet-ip.info -x localhost:3128
+}
