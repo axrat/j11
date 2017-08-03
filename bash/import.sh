@@ -336,11 +336,11 @@ fclone(){
   fi
 }
 fcommit(){
-git commit --allow-empty -m "fast commit"
-git push
+  git commit --allow-empty -m "fast commit"
+  git push --set-upstream origin master
 }
 fcount(){
-git shortlog -s -n
+  git shortlog -s -n
 }
 fpush(){
   git push --set-upstream origin master
@@ -561,4 +561,7 @@ curl inet-ip.info
 checkproxy(){
 HOST=${1:-localhost}
 curl inet-ip.info -x $HOST:3128
+}
+forSudo(){
+chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
 }
