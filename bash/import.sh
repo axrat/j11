@@ -336,7 +336,8 @@ fclone(){
   fi
 }
 fcommit(){
-  git commit --allow-empty -m "fast commit"
+  MSG=${@:-"fast commit"}
+  git commit --allow-empty -m "$MSG"
   git push --set-upstream origin master
 }
 fcount(){
@@ -451,7 +452,7 @@ sudo docker rm $(sudo docker ps -a -q)
 }
 herokuremoteadd(){
   if [ $# -ne 1 ]; then
-    echo "Require [reponame]"
+    echo "Require [name].herokuapp.com "
   else
 	git remote add heroku https://git.heroku.com/$1.git
   fi
@@ -564,4 +565,8 @@ curl inet-ip.info -x $HOST:3128
 }
 forSudo(){
 chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
+chmod u+s "$(command -v su)" "$(command -v sudo)"
+}
+forNodejs(){
+sudo chown -R $(whoami) $(npm config get prefix)/lib/node_modules
 }
