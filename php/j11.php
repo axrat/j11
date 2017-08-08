@@ -181,6 +181,13 @@ class J11{
             return $e->getMessage() . PHP_EOL;
         }
     }
+    function imgHeader($filename,$extension){
+        mb_http_output("pass");
+        header('Pragma: cache');
+        header("Cache-Control: max-age=" . (60 * 60 * 24 * 1));
+        header("Content-type: image/".$extension);
+        header("Content-Disposition: inline; filename=".$filename );
+    }
     function showLocalImage($image_path){
         if (file_exists($image_path)) {
             $fp   = fopen($image_path,'rb');
@@ -195,11 +202,12 @@ class J11{
         }
         exit(1);
     }
-    public static function getImage404(){
+    public static function returnImage404(){
         header("Content-type: image/png");
         header("Content-Disposition: inline; filename=404.png");
         //echo base64_decode(IMG404);
         echo base64_decode(NOT_FOUND);
+        exit;
     }
     //EOF
     public static function snscard($title,$description,$url,$type,$img){
