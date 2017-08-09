@@ -184,7 +184,7 @@ class J11{
     function imgHeader($filename,$extension){
         mb_http_output("pass");
         header('Pragma: cache');
-        header("Cache-Control: max-age=" . (60 * 60 * 24 * 1));
+        //header("Cache-Control: max-age=" . (60 * 60 * 24 * 1));
         header("Content-type: image/".$extension);
         header("Content-Disposition: inline; filename=".$filename );
     }
