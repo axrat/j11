@@ -447,4 +447,39 @@ chmod u+s "$(command -v su)" "$(command -v sudo)"
 }
 forNodejs(){
 sudo chown -R $(whoami) $(npm config get prefix)/lib/node_modules
+rm -rf node_modules/ && npm cache clean && npm install
+}
+sudoeof(){
+sudo bash -c "cat << 'EOF' > $1
+$2
+EOF"
+}
+xbash(){
+OUTPUT=bootstrap.sh
+if [ ! -f "$OUTPUT" ]; then
+bash -c "cat << 'EOF' > $OUTPUT
+#!/bin/bash
+
+EOF"
+chmod +x $OUTPUT
+fi
+}
+xpython(){
+OUTPUT=main.py
+if [ ! -f "$OUTPUT" ]; then
+bash -c "cat << 'EOF' > $OUTPUT
+#!/usr/bin/env python3
+# coding:utf-8
+
+EOF"
+chmod +x $OUTPUT
+fi
+}
+installpip(){
+wget https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py
+rm get-pip.py
+}
+simpleHTTPServer(){
+python -u -m SimpleHTTPServer 8000
 }
