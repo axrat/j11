@@ -3,4 +3,6 @@ k13
 .idea/
 *.iml
 *.out
+*.pyc
 __pycache__
+
