@@ -62,6 +62,10 @@ find . -mindepth 1 -maxdepth 1 ! -path ./${SUBDIR} | xargs -i{} mv -f {} ${SUBDI
 ' $SUBDIR
 git merge --allow-unrelated-histories --no-ff $SUBDIR
 }
+changecommitmessage(){
+  MSG=${@:-"### private commit message ###"}
+  git filter-branch --msg-filter "echo '${MSG}';" -f
+}
 creategithubgrasssvg(){
 curl https://github.com/$1 | awk '/<svg.+class="js-calendar-graph-svg"/,/svg>/' | sed -e 's/<svg/<svg xmlns="http:\/\/www.w3.org\/2000\/svg"/' > $1.svg
 }
@@ -69,7 +73,6 @@ fconfig(){
   git config --local user.name ${1:-$GIT_USER_NAME}
   git config --local user.email ${2:-$GIT_USER_EMAIL}
 }
-
 fclone(){
   if [ $# -ne 3 ]; then
     echo "Require[domain],[repouser],[reponame]"
@@ -81,6 +84,9 @@ fcommit(){
   MSG=${@:-"fast commit"}
   git commit --allow-empty -m "$MSG"
   git push --set-upstream origin master
+}
+fadd(){
+  git add .
 }
 fcount(){
   git shortlog -s -n
@@ -147,4 +153,22 @@ ORG=$2
 curl -u :${ACCESS_TOKEN} https://api.github.com/orgs/$ORG{}/repos
 curl -H 'Authorization: token ${ACCESS_TOKEN}' https://api.github.com/orgs/$ORG/repos
 curl 'https://api.github.com/orgs/${ORG}/repos?access_token=${ACCESS_TOKEN}'
+}
+gitcreateremotebranch(){
+  if [ $# -ne 1 ]; then
+    echo "Require [branch]"
+  else
+    git branch $1
+	git checkout $1
+	git branch --all
+	git push origin master:$1
+  fi
+}
+gitdeleteremotebranch(){
+  if [ $# -ne 1 ]; then
+    echo "Require [branch]"
+  else
+    git branch -d $1
+	git push --delete origin $1
+  fi
 }

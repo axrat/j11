@@ -426,7 +426,7 @@ xbash(){
 OUTPUT=bootstrap.sh
 if [ ! -f "$OUTPUT" ]; then
 bash -c "cat << 'EOF' > $OUTPUT
-#!/bin/bash
+#!/usr/bin/env bash
 
 EOF"
 chmod +x $OUTPUT
@@ -468,4 +468,9 @@ requireSudo(){
     "
     exit
   fi
+}
+skelVERSION(){
+bash -c "cat << 'EOF' > VERSION
+1.0.0
+EOF"
 }
