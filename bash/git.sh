@@ -69,9 +69,16 @@ changecommitmessage(){
 creategithubgrasssvg(){
 curl https://github.com/$1 | awk '/<svg.+class="js-calendar-graph-svg"/,/svg>/' | sed -e 's/<svg/<svg xmlns="http:\/\/www.w3.org\/2000\/svg"/' > $1.svg
 }
-fconfig(){
-  git config --local user.name ${1:-$GIT_USER_NAME}
-  git config --local user.email ${2:-$GIT_USER_EMAIL}
+clone(){
+  if [ $# -ne 5 ]; then
+    echo "Require [RepositoryHost]:[Username]/[RepositoryName].git"
+    echo "git local [GitUsername] [GitEmail]"
+  else
+    git clone git@$1:$2/$3.git
+    cd $3
+    git config --local user.name "$4"
+    git config --local user.email "$5"
+  fi
 }
 fclone(){
   if [ $# -ne 3 ]; then
@@ -79,6 +86,13 @@ fclone(){
   else
     git clone git@$1:$2/$3.git
   fi
+}
+fconfig(){
+  git config --local user.name ${1:-$GIT_USER_NAME}
+  git config --local user.email ${2:-$GIT_USER_EMAIL}
+}
+fsubmoduleinit(){
+  git submodule update --init --recursive
 }
 fcommit(){
   MSG=${@:-"fast commit"}
@@ -105,17 +119,6 @@ fremote(){
     echo "Require[domain],[repouser],[reponame]"
   else
     git remote add origin git@$1:$2/$3.git
-  fi
-}
-clone(){
-  if [ $# -ne 5 ]; then
-    echo "Require [RepositoryHost]:[Username]/[RepositoryName].git"
-    echo "git local [GitUsername] [GitEmail]"
-  else
-    git clone git@$1:$2/$3.git
-    cd $3
-    git config --local user.name "$4"
-    git config --local user.email "$5"
   fi
 }
 getLastCommitMessage(){
