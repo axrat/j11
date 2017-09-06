@@ -9,6 +9,13 @@ ks(){
 meke(){
   echo "Nyan!"
 }
+hr(){
+  CHAR=${1:-"-"}
+  for i in `seq 1 $(tput cols)`
+  do
+    printf "${CHAR}";
+  done
+}
 require(){
   echo "nano curl wget git expect zip nginx"
 }
@@ -23,6 +30,9 @@ rundir(){
 }
 fromdir(){
   echo $(cd $(dirname $BASH_SOURCE); pwd)
+}
+getenvroiment(){
+	printenv
 }
 #
 download(){
@@ -91,6 +101,9 @@ chmod-r(){
 forDotSSH(){
   sudo find ~/.ssh/ -type d -exec sudo chmod 755 {} +
   sudo find ~/.ssh/ -type f -exec sudo chmod 600 {} +
+}
+forParentDir(){
+  sudo chmod 777 ../`pwd | awk -F "/" '{ print $NF }'`
 }
 devcopy(){
 sudo df
@@ -229,13 +242,6 @@ extract(){
   else
     echo "'$1' is not a valid file"
   fi
-}
-hr(){
-  CHAR=${1:-"-"}
-  for i in `seq 1 $(tput cols)`
-  do
-    printf "${CHAR}";
-  done
 }
 declare -a jetbrains=("IdeaProjects" "PhpstormProjects" "CLionProjects" "PycharmProjects" "RubymineProjects" "WebstormProjects" )
 createJetBrainsDirectory(){
@@ -425,10 +431,28 @@ EOF"
 xbash(){
 OUTPUT=bootstrap.sh
 if [ ! -f "$OUTPUT" ]; then
-bash -c "cat << 'EOF' > $OUTPUT
+cat << 'EOF' > $OUTPUT
 #!/usr/bin/env bash
 
+if [[ "$(id -u)" != "0" ]]; then
+    PASS=$(zenity --entry --text="input:")
+    CMD=$0
+    expect -c "
+      set timeout -1
+      spawn sudo $CMD
+      expect \"assword\" {
+        send \"$PASS\n\"
+      }
+      interact
+    "
+    exit
+fi
+sudo bash -c "cat << 'EOF' > ok
+$(date +%Y%m%d%H%M%S)
 EOF"
+
+
+EOF
 chmod +x $OUTPUT
 fi
 }
