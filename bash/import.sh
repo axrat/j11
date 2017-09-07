@@ -19,6 +19,7 @@ loadx(){
   load $X/$1
 }
 
+loadx "for"
 loadx "alias"
 loadx var
 loadx func

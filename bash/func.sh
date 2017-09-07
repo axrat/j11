@@ -98,13 +98,6 @@ chmod-r(){
     sudo find $3 -type $1 -exec sudo chmod $2 {} +
   fi
 }
-forDotSSH(){
-  sudo find ~/.ssh/ -type d -exec sudo chmod 755 {} +
-  sudo find ~/.ssh/ -type f -exec sudo chmod 600 {} +
-}
-forParentDir(){
-  sudo chmod 777 ../`pwd | awk -F "/" '{ print $NF }'`
-}
 devcopy(){
 sudo df
 echo "Ex) dd if=/dev/sr0 of=/root/dev.iso"
@@ -414,14 +407,6 @@ curl inet-ip.info
 checkproxy(){
 HOST=${1:-localhost}
 curl inet-ip.info -x $HOST:3128
-}
-forSudo(){
-chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
-chmod u+s "$(command -v su)" "$(command -v sudo)"
-}
-forNodejs(){
-sudo chown -R $(whoami) $(npm config get prefix)/lib/node_modules
-rm -rf node_modules/ && npm cache clean && npm install
 }
 sudoeof(){
 sudo bash -c "cat << 'EOF' > $1
