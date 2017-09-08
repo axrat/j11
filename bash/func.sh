@@ -107,14 +107,6 @@ echo "of path:"
 read DDOF
 sudo dd if=$DDIF of=$DDOF
 }
-cases(){
-mkdir -p case1
-mkdir -p case2
-mkdir -p case3
-touch case1/.gitkeep
-touch case2/.gitkeep
-touch case3/.gitkeep
-}
 launch-maya(){
 	sudo /usr/autodesk/maya2016/bin/maya
 }
@@ -336,29 +328,6 @@ crossorigincheck(){
   fi
 }
 
-skelMakefile(){
-cat >> Makefile << 'EOF'
-#!/usr/bin/make -f
-define README
-# README
-endef
-export README
-RUN := /bin/bash
-all:
-	@echo make readme
-readme:
-	@echo "$$README"
-version:
-	$(RUN) \
-	--version
-EOF
-chmod +x Makefile
-}
-ubuntuoraclejdkinstall(){
- sudo add-apt-repository ppa:webupd8team/java
- sudo apt-get update
- sudo apt-get install oracle-java8-installer
-}
 checkdirectorysize(){
   if [ $# -ne 1 ]; then
     echo "Require [DirectoryPath]"
@@ -367,33 +336,12 @@ checkdirectorysize(){
     printf "byte\n"
   fi
 }
-installtrans(){
-#https://github.com/soimort/translate-shell
-DIR=/usr/local/bin/
-if [ ! -e ${DIR}trans ]; then
-  wget git.io/trans
-  chmod +x ./trans
-  sudo mv ./trans $DIR
-fi
-}
-installnanorc(){
-rm -rf ~/.nano
-git clone https://github.com/nanorc/nanorc.git
-cd nanorc
-make install
-cd ..
-sudo rm -rf nanorc
-}
 phpconfigurecheck(){
 php -i  | grep './configure'
 }
 updatelocaletime(){
 sudo cp /etc/localtime /etc/localtime.org
 sudo ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-}
-ubuntuinstallntp(){
-sudo apt-get install ntp
-sudo /etc/init.d/ntp start
 }
 rmcomment(){
 grep -v -e '^\s*#' -e '^\s*$' $1
@@ -412,50 +360,6 @@ sudoeof(){
 sudo bash -c "cat << 'EOF' > $1
 $2
 EOF"
-}
-xbash(){
-OUTPUT=bootstrap.sh
-if [ ! -f "$OUTPUT" ]; then
-cat << 'EOF' > $OUTPUT
-#!/usr/bin/env bash
-
-if [[ "$(id -u)" != "0" ]]; then
-    PASS=$(zenity --entry --text="input:")
-    CMD=$0
-    expect -c "
-      set timeout -1
-      spawn sudo $CMD
-      expect \"assword\" {
-        send \"$PASS\n\"
-      }
-      interact
-    "
-    exit
-fi
-sudo bash -c "cat << 'EOF' > ok
-$(date +%Y%m%d%H%M%S)
-EOF"
-
-
-EOF
-chmod +x $OUTPUT
-fi
-}
-xpython(){
-OUTPUT=main.py
-if [ ! -f "$OUTPUT" ]; then
-bash -c "cat << 'EOF' > $OUTPUT
-#!/usr/bin/env python3
-# coding:utf-8
-
-EOF"
-chmod +x $OUTPUT
-fi
-}
-installpip(){
-wget https://bootstrap.pypa.io/get-pip.py
-sudo python get-pip.py
-rm get-pip.py
 }
 simpleHTTPServer(){
 python -u -m SimpleHTTPServer 8000
@@ -477,9 +381,4 @@ requireSudo(){
     "
     exit
   fi
-}
-skelVERSION(){
-bash -c "cat << 'EOF' > VERSION
-1.0.0
-EOF"
 }

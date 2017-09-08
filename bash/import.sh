@@ -24,3 +24,5 @@ loadx "alias"
 loadx var
 loadx func
 loadx git
+loadx skel
+loadx install
