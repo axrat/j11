@@ -56,9 +56,7 @@ version:
 	$(RUN) \
 	--version
 EOF
-chmod +x Makefile
 }
-
 skelpython(){
 OUTPUT=main.py
 if [ ! -f "$OUTPUT" ]; then
