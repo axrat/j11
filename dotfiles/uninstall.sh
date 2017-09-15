@@ -7,3 +7,5 @@ rm -f ~/.vimrc
 rm -f ~/.dein.toml
 rm -f ~/.dein_lazy.toml
 rm -f ~/.emacs
+rm -f ~/.bash_completion
+
