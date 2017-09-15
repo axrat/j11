@@ -4,6 +4,9 @@ sudo find /j11/ -type d -exec sudo chmod 777 {} +
 sudo find /j11/ -type f -exec sudo chmod 666 {} +
 sudo chmod 700 ${0##*/}
 
+sudo chmod +x /j11/dotfiles/install.sh
+sudo chmod +x /j11/dotfiles/uninstall.sh
+
 #nanorc
 if [ -d ~/.nano ]; then
   echo found ~/.nano

@@ -7,5 +7,5 @@ ln -s /j11/dotfiles/.vimrc ~/.vimrc
 ln -s /j11/dotfiles/.dein.toml ~/.dein.toml
 ln -s /j11/dotfiles/.dein_lazy.toml ~/.dein_lazy.toml
 ln -s /j11/dotfiles/.emacs ~/.emacs
-
+ln -s /j11/dotfiles/.bash_completion ~/.bash_completion
 
