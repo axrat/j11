@@ -1,5 +1,5 @@
 #~/.dein_lazy.toml
 
-#[[plugins]]
-#repo = 'onoie/open-browser.vim'
+[[plugins]]
+repo = 'onoie/winry.vim'
 

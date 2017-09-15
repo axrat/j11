@@ -82,22 +82,3 @@ let g:lightline = {
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-
-":Tes
-" [ ] 備忘録のためのサンプルを書く
-"カーソル行のTODO[]/[x]を切り替えるやつ
-"Note
-"vim->:source ~/.vimrc or vim.:source %
-
-function! s:Swap(line)
-  if a:line =~ '^"*\s*\[x\]'
-    " Undone
-    call setline('.', substitute(a:line, '\[x\]', '[ ]', ''))
-  else
-    " Done
-    call setline('.', substitute(a:line, '\[ \]', '[x]', ''))
-  endif
-endfunction
-
-command! -nargs=0 Tes call s:Swap(getline("."))
-
