@@ -31,54 +31,73 @@ set clipboard=unnamedplus,autoselect
 nnoremap j gj
 nnoremap k gk
 
-"DeinStart
-"let s:dein_dir = expand('~/.vim/dein')
-"let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-"if &compatible
-"  set nocompatible
-"endif
-"if !isdirectory(s:dein_repo_dir)
-"  execute '!git clone git@github.com:Shougo/dein.vim.git' 
-"s:dein_repo_dir
-"endif
-"execute 'set runtimepath^=' . s:dein_repo_dir
 
-"if dein#load_state(s:dein_dir)
-"  call dein#begin(s:dein_dir)
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
 
-"  call dein#add('Shougo/dein.vim')
-"  call dein#add('Shougo/unite.vim')
-"  call dein#add('itchyny/lightline.vim')
-"  call dein#add('thinca/vim-quickrun')
-"  call dein#add('plasticboy/vim-markdown')
-"  call dein#add('kannokanno/previm')
-"  call dein#add('tyru/open-browser.vim')
-"  call dein#add('scrooloose/syntastic')
-"  call dein#add('junegunn/vim-easy-align')
-"  call dein#add('mattn/emmet-vim')
-"  call dein#add('onoie/migawari')
+" Required:
+set runtimepath+=/home/onoie/.vim/dein/repos/github.com/Shougo/dein.vim
 
-"  let s:toml = '~/.dein.toml'
-"  let s:lazy_toml = '~/.dein_lazy.toml'
-"  call dein#load_toml(s:toml,      {'lazy': 0})
-"  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+" Required:
+if dein#load_state('/home/onoie/.vim/dein')
+  call dein#begin('/home/onoie/.vim/dein')
 
-"  call dein#end()
-"  call dein#save_state()
-"endif
+  " Let dein manage dein
+  " Required:
+  call dein#add('/home/onoie/.vim/dein/repos/github.com/Shougo/dein.vim')
 
-"if dein#check_install()
-"  call dein#install()
-"endif
-"filetype plugin indent on
-"DeinEnd
+  " Add or remove your plugins here:
+  call dein#add('Shougo/unite.vim')
+  call dein#add('itchyny/lightline.vim')
+  let s:toml = '~/.dein.toml'
+  let s:lazy_toml = '~/.dein_lazy.toml'
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+"End dein Scripts-------------------------
+
 
 "for lightline
-"set laststatus=2
-"let g:lightline = {
-"    \ 'colorscheme' : 'wombat'
-"    \ }
+set laststatus=2
+let g:lightline = {
+    \ 'colorscheme' : 'wombat'
+    \ }
 
 "for easy-align
-"xmap ga <Plug>(EasyAlign)
-"nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+
+":Tes
+" [ ] 備忘録のためのサンプルを書く
+"カーソル行のTODO[]/[x]を切り替えるやつ
+"Note
+"vim->:source ~/.vimrc or vim.:source %
+
+function! s:Swap(line)
+  if a:line =~ '^"*\s*\[x\]'
+    " Undone
+    call setline('.', substitute(a:line, '\[x\]', '[ ]', ''))
+  else
+    " Done
+    call setline('.', substitute(a:line, '\[ \]', '[x]', ''))
+  endif
+endfunction
+
+command! -nargs=0 Tes call s:Swap(getline("."))
+
