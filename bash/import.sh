@@ -1,7 +1,6 @@
 #!/bin/bash
-
-export X="$(cd $(dirname $BASH_SOURCE); pwd)"
-export J="${X}/import.sh"
+export J_DIR="$(cd $(dirname $BASH_SOURCE); pwd)"
+export J="${J_DIR}/import.sh"
 
 load(){
   if [ $# -ne 1 ]; then
@@ -16,7 +15,7 @@ load(){
   fi
 }
 loadx(){
-  load $X/$1
+  load $J_DIR/$1
 }
 
 loadx "for"
