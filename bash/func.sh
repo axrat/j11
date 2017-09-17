@@ -17,7 +17,7 @@ hr(){
   done
 }
 require(){
-  echo "nano curl wget git expect zip nginx"
+  echo "nano curl wget git expect zip nginx jq"
 }
 fx(){ 
   sudo wget $1 && sudo chmod +x ${1##*/} && sudo ./${1##*/}
