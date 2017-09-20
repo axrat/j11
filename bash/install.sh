@@ -37,3 +37,16 @@ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh >
 sh ./installer.sh ~/.vim/dein
 rm installer.sh
 }
+installubuntudesktop(){
+  sudo apt-get install ubuntu-desktop --fix-missing -y
+}
+installvirtualboxarch(){
+##Arch Linux Kernel
+sudo pacman -S virtualbox
+##install with virtualbox-host-modules(Depegency
+sudo pacman -S dkms kernel-headers
+sudo pacman -S virtualbox-guest-dkms
+sudo pacman -S virtualbox-host-dkms
+dkms install vboxhost/$(pacman -Q virtualbox|awk {'print $2'}|sed 's/\-.\+//') -k $(uname -rm|sed 's/\ /\//')
+sudo /sbin/rcvboxdrv setup
+}

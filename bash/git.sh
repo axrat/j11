@@ -112,6 +112,9 @@ fpull(){
   git pull origin master --depth=1
 }
 freset(){
+  git reset --soft HEAD^
+}
+fresethard(){
   git reset --hard origin/master
 }
 fremote(){
@@ -144,9 +147,7 @@ gitrmremotebranch(){
     git push --delete origin $1
   fi
 }
-frevert(){
-git reset --soft HEAD^
-}
+
 getGithubPublicRepositoryViaAPI(){
 curl https://api.github.com/users/onoie/repos
 }
@@ -174,4 +175,19 @@ gitdeleteremotebranch(){
     git branch -d $1
 	git push --delete origin $1
   fi
+}
+gitskip(){
+  if [ $# -ne 1 ]; then
+    echo "Require [filepath]"
+  else
+  fi
+}
+gitskiprevert(){
+  if [ $# -ne 1 ]; then
+    echo "Require [filepath]"
+  else
+  fi
+}
+gitskipcheck(){
+  git ls-files -v | grep ^S
 }
