@@ -91,9 +91,6 @@ fconfig(){
   git config --local user.name ${1:-$GIT_USER_NAME}
   git config --local user.email ${2:-$GIT_USER_EMAIL}
 }
-fsubmoduleinit(){
-  git submodule update --init --recursive
-}
 fcommit(){
   MSG=${@:-"fast commit"}
   git commit --allow-empty -m "$MSG"
@@ -193,3 +190,12 @@ gitskiprevert(){
 gitskipcheck(){
   git ls-files -v | grep ^S
 }
+gitsubmoduleinit(){
+  git submodule update --init --recursive
+}
+gitsubmodulepull(){
+  git submodule foreach git pull origin master
+}
+
+
+
