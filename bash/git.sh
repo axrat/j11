@@ -180,12 +180,14 @@ gitskip(){
   if [ $# -ne 1 ]; then
     echo "Require [filepath]"
   else
+    git update-index --skip-worktree $1
   fi
 }
 gitskiprevert(){
   if [ $# -ne 1 ]; then
     echo "Require [filepath]"
   else
+    git update-index --no-skip-worktree $1
   fi
 }
 gitskipcheck(){
