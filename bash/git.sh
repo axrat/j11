@@ -190,12 +190,6 @@ gitskiprevert(){
 gitskipcheck(){
   git ls-files -v | grep ^S
 }
-gitsubmoduleinit(){
-  git submodule update --init --recursive
-}
-gitsubmodulepull(){
-  git submodule foreach git pull origin master
-}
 
 
 
