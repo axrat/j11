@@ -382,3 +382,12 @@ requireSudo(){
     exit
   fi
 }
+vncstart(){
+export USER=root
+VNC_RESOLUTION="800x600"#"1360x768"
+vncserver :1 -geometry $VNC_RESOLUTION -depth 24
+}
+vncstop(){
+export USER=root
+vncserver -kill :1
+}

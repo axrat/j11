@@ -35,6 +35,7 @@ sudo bash -c "cat << 'EOF' > ok
 $(date +%Y%m%d%H%M%S)
 EOF"
 echo "complete"
+exit 0
 
 EOF
 chmod +x $OUTPUT
