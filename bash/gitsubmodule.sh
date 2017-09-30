@@ -1,3 +1,4 @@
+#!/bin/bash
 
 gitsubmoduleadd(){
   if [ $# -ne 3 ]; then
