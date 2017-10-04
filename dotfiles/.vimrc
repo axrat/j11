@@ -9,12 +9,15 @@ scriptencoding utf-8
 syntax enable
 colorscheme torte
 
+set list
+set listchars=tab:▸\ ,trail:-,extends:»,precedes:«,nbsp:%
 "Setting
 set ruler " 右下に表示される行・列の番号を表示
 set autoindent " 自動インデントを有効にする
-set tabstop=4 " タブを表示する時の幅
-set shiftwidth=4 " 自動で挿入されるインデントの幅
-set softtabstop=4 " タブ入力時の幅を4に設定
+set noexpandtab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=0
 set showmatch " 閉じ括弧入力時に対応する括弧の強調
 set matchtime=4 " showmatch設定の表示秒数(0.1秒単位)
 set incsearch " インクリメンタルサーチを行う(検索文字入力中から検索)
@@ -81,4 +84,18 @@ let g:lightline = {
 "for easy-align
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
+"Helper
+function! s:tab2Space()
+  execut 'set expandtab'
+  execut 'retab!'
+endfunction
+command! Tab2Space :call s:tab2Space()
+function! s:space2Tab()
+  execut 'set noexpandtab'
+  execut 'retab!'
+endfunction
+command! Space2Tab :call s:space2Tab()
+
+"Note
 

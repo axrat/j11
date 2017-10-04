@@ -91,13 +91,13 @@ fconfig(){
   git config --local user.name ${1:-$GIT_USER_NAME}
   git config --local user.email ${2:-$GIT_USER_EMAIL}
 }
+fadd(){
+  git add .
+}
 fcommit(){
   MSG=${@:-"fast commit"}
   git commit --allow-empty -m "$MSG"
   git push --set-upstream origin master
-}
-fadd(){
-  git add .
 }
 fcount(){
   git shortlog -s -n
@@ -105,7 +105,19 @@ fcount(){
 fpush(){
   git push --set-upstream origin master
 }
+frelease(){
+  if [ $# -ne 1 ]; then
+    echo "Require [tag]"
+  else
+    git tag -d $1
+    git push origin :$1
+    git commit --allow-empty -m "Release $1"
+    git tag $1
+	git push --set-upstream origin $1
+  fi
+}
 fpull(){
+  git pull --tags
   git pull origin master --depth=1
 }
 freset(){
