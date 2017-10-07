@@ -19,7 +19,7 @@ touch .hidden | git add .hidden
 git reflog expire --expire=now --all
 git gc --aggressive --prune=now
 }
-override(){
+gitoverride(){
 git checkout --orphan tmp
 git commit -m "override"
 git checkout -B master
@@ -38,7 +38,7 @@ git remote set-url origin $1
 #git fetch origin
 #git reset --hard origin/master
 #}
-shallowclone(){
+gitshallowclone(){
 git clone --depth 1 $1
 git fetch --unshallow
 }
@@ -47,7 +47,7 @@ USERNAME=onoie
 USEREMAIL=onoie3@gmail.com
 git filter-branch -f --env-filter "GIT_AUTHOR_NAME='${USERNAME}'; GIT_AUTHOR_EMAIL='${USEREMAIL}'; GIT_COMMITTER_NAME='${USERNAME}'; GIT_COMMITTER_EMAIL='${USEREMAIL}';" HEAD
 }
-repositorymerge(){
+gitrepositorymerge(){
 if [ $# -ne 1 ]; then
   echo "require local target repository path" 1>&2
   echo "Ex) [~/repos/repo]" 1>&2
@@ -62,7 +62,7 @@ find . -mindepth 1 -maxdepth 1 ! -path ./${SUBDIR} | xargs -i{} mv -f {} ${SUBDI
 ' $SUBDIR
 git merge --allow-unrelated-histories --no-ff $SUBDIR
 }
-changecommitmessage(){
+gitchangecommitmessage(){
   MSG=${@:-"### private commit message ###"}
   git filter-branch --msg-filter "echo '${MSG}';" -f
 }
@@ -202,6 +202,6 @@ gitskiprevert(){
 gitskipcheck(){
   git ls-files -v | grep ^S
 }
-
-
-
+gitinitshare(){
+  git init --bare --shared
+}
