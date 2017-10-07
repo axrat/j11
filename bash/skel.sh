@@ -68,4 +68,13 @@ EOF"
 chmod +x $OUTPUT
 fi
 }
+skelhtml(){
+cat >> index.html << 'EOF'
+<html>
+<head></head>
+<body><center>HelloWorld</center>
+</body>
+</html>
+EOF
+}
 
