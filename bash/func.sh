@@ -95,7 +95,7 @@ nginxandphpfpm(){
   esac
 }
 browse(){
-xdg-open $1
+  (sleep 2s; xdg-open $1) &
 }
 chmod-r(){
   if [ $# -ne 3 ]; then
