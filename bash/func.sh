@@ -20,7 +20,10 @@ require(){
   echo "nano curl wget expect zip jq"
 }
 base(){
-  echo "git curses nginx"
+  echo "git nginx"
+}
+utils(){
+  echo "tree curses"
 }
 fx(){ 
   sudo wget $1 && sudo chmod +x ${1##*/} && sudo ./${1##*/}
