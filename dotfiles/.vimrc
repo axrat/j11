@@ -100,3 +100,5 @@ command! Space2Tab :call s:space2Tab()
 "Note
 "reload function source %
 "selectall function ggv<shift+g>
+"directory create
+":!mkdir -p %:h

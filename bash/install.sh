@@ -50,3 +50,7 @@ sudo pacman -S virtualbox-host-dkms
 dkms install vboxhost/$(pacman -Q virtualbox|awk {'print $2'}|sed 's/\-.\+//') -k $(uname -rm|sed 's/\ /\//')
 sudo /sbin/rcvboxdrv setup
 }
+installrbenv(){
+git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+}
