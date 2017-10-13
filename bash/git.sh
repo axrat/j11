@@ -99,11 +99,14 @@ fcommit(){
   git commit --allow-empty -m "$MSG"
   git push --set-upstream origin master
 }
-fcount(){
-  git shortlog -s -n
+fmerge(){
+  git merge --allow-unrelated-histories origin/master
 }
 fpush(){
   git push --set-upstream origin master
+}
+fcount(){
+  git shortlog -s -n
 }
 frelease(){
   if [ $# -ne 1 ]; then
