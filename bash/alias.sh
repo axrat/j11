@@ -8,4 +8,5 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias docker='sudo docker'
-
+alias v="vim"
+alias e="emacs"
