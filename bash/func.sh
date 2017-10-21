@@ -397,3 +397,13 @@ vncstop(){
 export USER=root
 vncserver -kill :1
 }
+kokoroiopost(){
+ MESSAGE=$1
+ KOKOROIO_CHANNEL=$KOKOROIO_CHANNEL_DEV
+curl -X POST \
+	--header "Content-Type: application/x-www-form-urlencoded" \
+	--header "Accept: application/json" \
+	--header "X-Access-Token: $KOKOROIO_ACCESS_TOKEN" \
+	-d "message=$MESSAGE" \
+	"https://kokoro.io/api/v1/channels/$KOKOROIO_CHANNEL/messages"
+}
