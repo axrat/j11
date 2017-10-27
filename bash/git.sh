@@ -1,6 +1,5 @@
 #!/bin/bash
 
-alias s='git status'
 GIT_USER_NAME=onoie
 GIT_USER_EMAIL=onoie3@gmail.com
 ssh-github(){
