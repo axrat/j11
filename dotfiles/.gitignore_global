@@ -24,6 +24,7 @@
 #解釈されない
 
 #onoie
+.gitkeep
 ok
 *.iml
 **/.idea/*
