@@ -353,7 +353,8 @@ rmcomment(){
 grep -v -e '^\s*#' -e '^\s*$' $1
 }
 bkup(){
-\cp -rf $1 $1.org
+rm -rf $1.org
+cp -rf $1 $1.org
 }
 checkglobalip(){
 curl inet-ip.info
