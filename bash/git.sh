@@ -115,7 +115,7 @@ frelease(){
     git push origin :$1
     git commit --allow-empty -m "Release $1"
     git tag $1
-	git push --set-upstream origin $1
+    git push --set-upstream origin $1
   fi
 }
 fpull(){

@@ -10,5 +10,6 @@ alias egrep='egrep --color=auto'
 alias docker='sudo docker'
 alias v="vim"
 alias e="emacs"
-alias s='git status --untracked-files=all'
+alias s='git status'
+alias sall='git status --untracked-files=all'
 

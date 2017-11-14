@@ -7,7 +7,7 @@ set fileencodings=ucs-bom,utf-8,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,
 set fileformats=unix,dos,mac
 scriptencoding utf-8
 syntax enable
-colorscheme torte
+colorscheme darcula
 
 set list
 set listchars=tab:▸\ ,trail:-,extends:»,precedes:«,nbsp:%
@@ -102,3 +102,6 @@ command! Space2Tab :call s:space2Tab()
 "selectall function ggv<shift+g>
 "directory create
 ":!mkdir -p %:h
+"
+"for vim-go
+set autowrite
