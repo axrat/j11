@@ -313,6 +313,9 @@ sudo docker stop $(sudo docker ps -a -q)
 dockerrmall(){
 sudo docker rm $(sudo docker ps -a -q)
 }
+herokupush(){
+  git push heroku master
+}
 herokuremoteadd(){
   if [ $# -ne 1 ]; then
     echo "Require [name].herokuapp.com "
