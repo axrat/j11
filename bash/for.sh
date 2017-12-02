@@ -16,4 +16,9 @@ sudo chown -R $(whoami) $(npm config get prefix)/lib/node_modules
 #rm -rf node_modules/ && npm cache clean && npm install
 #sudo chmod 770 $NVM_DIR -R
 }
-
+forDocker(){
+sudo groupadd docker
+sudo gpasswd -a $USER docker
+sudo systemctl restart docker
+echo "plz relogin"
+}
