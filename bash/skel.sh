@@ -77,4 +77,16 @@ cat >> index.html << 'EOF'
 </html>
 EOF
 }
+skelgo(){
+cat >> main.go << 'EOF'
+package main
 
+import (
+	"fmt"
+)
+
+func main() {
+	fmt.Println("HelloWorld")
+}
+EOF
+}
