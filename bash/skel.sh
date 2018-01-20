@@ -41,7 +41,7 @@ chmod +x $OUTPUT
 fi
 }
 skelmakefile(){
-cat >> Makefile << 'EOF'
+cat > Makefile << 'EOF'
 #!/usr/bin/make -f
 define README
 # README
@@ -69,7 +69,7 @@ chmod +x $OUTPUT
 fi
 }
 skelhtml(){
-cat >> index.html << 'EOF'
+cat > index.html << 'EOF'
 <html>
 <head></head>
 <body><center>HelloWorld</center>
@@ -78,7 +78,7 @@ cat >> index.html << 'EOF'
 EOF
 }
 skelgo(){
-cat >> main.go << 'EOF'
+cat > main.go << 'EOF'
 package main
 import (
 	"github.com/onoie/goz"
