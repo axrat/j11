@@ -81,7 +81,7 @@ skelgo(){
 cat > main.go << 'EOF'
 package main
 import (
-	"github.com/onoie/goz"
+	"github.com/TransAssist/goz"
 )
 import (
 	_ "github.com/mattn/go-sqlite3"
