@@ -422,6 +422,6 @@ filesearch(){
 	if [ $# -ne 1 ]; then
 		echo "Require [FileName]"
 	else
-		find ~/ -name $1 -ls
+		find / -name $1 -ls
 	fi
 }
