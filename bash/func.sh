@@ -414,3 +414,8 @@ curl -X POST \
 	-d "message=$MESSAGE" \
 	"https://kokoro.io/api/v1/channels/$KOKOROIO_CHANNEL/messages"
 }
+gorun(){
+	MAIN=${1:-main.go}
+	go run $MAIN
+
+}
