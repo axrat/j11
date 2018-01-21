@@ -417,5 +417,11 @@ curl -X POST \
 gorun(){
 	MAIN=${1:-main.go}
 	go run $MAIN
-
+}
+filesearch(){
+	if [ $# -ne 1 ]; then
+		echo "Require [FileName]"
+	else
+		find ~/ -name $1 -ls
+	fi
 }
