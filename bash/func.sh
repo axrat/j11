@@ -425,3 +425,11 @@ filesearch(){
 		find / -name $1 -ls
 	fi
 }
+dnscheck(){
+	if [ $# -ne 1 ]; then
+		echo "Require [domain]"
+	else
+		dig + noall + answer $1
+	fi
+}
+
