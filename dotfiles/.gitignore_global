@@ -31,6 +31,9 @@ ok
 *.o
 __pycache__
 *.pyc
+.ssh/**
+id_rsa
+id_rsa.pub
 
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
