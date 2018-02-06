@@ -48,7 +48,7 @@ download(){
 }
 #
 createsshkey(){
-ssh-keygen -t rsa -C ""
+ssh-keygen -t rsa -b 4096 -C ""
 }
 createsshkeyauto(){
 expect -c "
