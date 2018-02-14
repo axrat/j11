@@ -25,6 +25,7 @@
 
 #onoie
 ok
+clone.sh
 *.iml
 **/.idea/*
 !**/.idea/runConfigurations
