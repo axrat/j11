@@ -13,7 +13,7 @@ set list
 set listchars=tab:▸\ ,trail:-,extends:»,precedes:«,nbsp:%
 "Setting
 set ruler " 右下に表示される行・列の番号を表示
-set autoindent " 自動インデントを有効にする
+"set autoindent " 自動インデントを有効にする
 set noexpandtab
 set tabstop=2
 set shiftwidth=2
