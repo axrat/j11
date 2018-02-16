@@ -52,8 +52,7 @@ if dein#load_state('/home/onoie/.vim/dein')
   call dein#add('/home/onoie/.vim/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
-  call dein#add('Shougo/unite.vim')
-  call dein#add('itchyny/lightline.vim')
+  "call dein#add('itchyny/lightline.vim')
   let s:toml = '~/.dein.toml'
   let s:lazy_toml = '~/.dein_lazy.toml'
   call dein#load_toml(s:toml,      {'lazy': 0})

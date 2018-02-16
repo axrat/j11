@@ -1,5 +1,18 @@
 #~/.dein.toml
 
+#[[plugins]]
+#repo = 'itchyny/lightline.vim'
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+[[plugins]]
+repo = 'Shougo/vimfiler.vim'
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+
+
 [[plugins]]
 repo = 'tyru/open-browser.vim'
 
@@ -15,3 +28,6 @@ repo = 'junegunn/vim-easy-align'
 [[plugins]]
 repo = 'mattn/emmet-vim'
 
+
+[[plugins]]
+repo = 'mattn/sonictemplate-vim'
