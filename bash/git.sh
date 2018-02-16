@@ -41,7 +41,7 @@ gitshallowclone(){
 git clone --depth 1 $1
 git fetch --unshallow
 }
-changecommiter(){
+gitchangecommiter(){
 USERNAME=onoie
 USEREMAIL=onoie3@gmail.com
 git filter-branch -f --env-filter "GIT_AUTHOR_NAME='${USERNAME}'; GIT_AUTHOR_EMAIL='${USEREMAIL}'; GIT_COMMITTER_NAME='${USERNAME}'; GIT_COMMITTER_EMAIL='${USEREMAIL}';" HEAD
