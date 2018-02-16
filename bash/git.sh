@@ -37,8 +37,10 @@ git remote set-url origin $1
 #git fetch origin
 #git reset --hard origin/master
 #}
-gitshallowclone(){
+gitshallow(){
 git clone --depth 1 $1
+}
+gitunshallow(){
 git fetch --unshallow
 }
 gitchangecommiter(){
