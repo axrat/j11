@@ -9,6 +9,11 @@ ssh-bitbucket(){
   ssh -T git@bitbucket.org
 }
 hideandseek(){
+echo -n "Are you sure? [y]: "
+read ans
+case $ans in
+  '' | y* | Y* )
+
 git filter-branch -f --index-filter '
 git rm -rf --cached --ignore-unmatch * 
 ' HEAD
@@ -17,6 +22,11 @@ touch .hidden | git add .hidden
 ' HEAD
 git reflog expire --expire=now --all
 git gc --aggressive --prune=now
+
+    ;;
+  * )
+    ;;
+esac
 }
 gitoverride(){
 git checkout --orphan tmp
