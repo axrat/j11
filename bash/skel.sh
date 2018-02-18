@@ -68,6 +68,9 @@ EOF"
 chmod +x $OUTPUT
 fi
 }
+skelpythoninit(){
+touch __init__.py
+}
 skelhtml(){
 cat > index.html << 'EOF'
 <html>
