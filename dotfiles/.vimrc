@@ -84,23 +84,3 @@ let g:lightline = {
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-"Helper
-function! s:tab2Space()
-  execut 'set expandtab'
-  execut 'retab!'
-endfunction
-command! Tab2Space :call s:tab2Space()
-function! s:space2Tab()
-  execut 'set noexpandtab'
-  execut 'retab!'
-endfunction
-command! Space2Tab :call s:space2Tab()
-
-"Note
-"reload function source %
-"selectall function ggv<shift+g>
-"directory create
-":!mkdir -p %:h
-"
-"for vim-go
-set autowrite

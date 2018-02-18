@@ -433,4 +433,6 @@ dnscheck(){
 		dig + noall + answer $1
 	fi
 }
-
+winry(){
+vim +":source ~/.vim/dein/repos/github.com/onoie/winry.vim/plugin/winry.vim " +:q
+}
