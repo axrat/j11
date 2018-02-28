@@ -123,7 +123,7 @@ wget-github-public(){
   if [ $# -ne 2 ]; then
     echo "Require bitbucket [repouser],[reponame]"
   else
-    wget --no-check-certificate https://github.com/$1/$2/archive/master.zip -o master.zip
+    wget --no-check-certificate https://github.com/$1/$2/archive/master.zip -O master.zip
   fi
 }
 wget-bitbucket(){
@@ -131,7 +131,7 @@ wget-bitbucket(){
     echo "Require bitbucket [username],[repouser],[reponame]"
   else
     #--password=password
-    wget --user=$1 --ask-password https://bitbucket.org/$2/$3/get/master.zip -o master.zip
+    wget --user=$1 --ask-password https://bitbucket.org/$2/$3/get/master.zip -O master.zip
   fi
 }
 getZipRootDirectoryName(){
