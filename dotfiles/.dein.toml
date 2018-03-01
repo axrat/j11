@@ -1,7 +1,7 @@
 #~/.dein.toml
 
 [[plugins]]
-repo = 'onoie/winry.vim'
+repo = 'axrat/winry.vim'
 
 #[[plugins]]
 #repo = 'itchyny/lightline.vim'

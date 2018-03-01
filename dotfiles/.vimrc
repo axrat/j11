@@ -74,6 +74,11 @@ endif
 "End dein Scripts-------------------------
 
 
+
+nnoremap <F5> :<C-u>split $MYVIMRC<CR>
+nnoremap <F6> :<C-u>source $MYVIMRC<CR>
+
+
 "for lightline
 set laststatus=2
 let g:lightline = {
