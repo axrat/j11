@@ -1,11 +1,7 @@
 #!/bin/bash
 
-sudo chmod 777 $(cd $(dirname $0); pwd) -Rf
-#sudo find /j11/ -type d -exec sudo chmod 777 {} +
-#sudo find /j11/ -type f -exec sudo chmod 666 {} +
+sudo chmod 777 $(cd $(dirname $0); pwd) -f
 sudo chmod 700 ${0##*/}
-
-
 sudo chmod +x /j11/dotfiles/install.sh
 sudo chmod +x /j11/dotfiles/uninstall.sh
 
@@ -18,7 +14,7 @@ else
     echo "found $DOWNLOAD"
   else
     echo "not found $DOWNLOAD"
-    wget --no-check-certificate https://github.com/nanorc/nanorc/archive/master.zip -O nanorc.zip
+    wget --no-check-certificate https://github.com/nanorc/nanorc/archive/master.zip -O $DOWNLoAD
     unzip $DONWLOAD
     cd nanorc-master
     make install
