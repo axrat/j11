@@ -21,3 +21,21 @@ else
   sh ./installer.sh ~/.vim/dein
   rm $DOWNLOAD
 fi
+
+echo "ADD .bashrc"
+hr(){
+  CHAR=${1:-"-"}
+  for i in `seq 1 $(tput cols)`
+  do
+    printf "${CHAR}";
+  done
+}
+hr
+cat << 'EOF'
+export BIN="~/bin"
+export PATH=$PATH:$BIN
+[[ -f $BIN/x ]] && . $BIN/x
+EOF
+hr
+
+
