@@ -18,7 +18,7 @@ else
   DOWNLOAD=installer.sh
   curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $DOWNLOAD
   chmod +x $DOWNLOAD
-  sh ./installer.sh ~/.vim/dein
+  sh ./$DOWNLOAD ~/.vim/dein
   rm $DOWNLOAD
 fi
 
