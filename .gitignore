@@ -1,3 +1,5 @@
+dotfiles/vim/**
+!dotfiles/vim/colors/darcula.vim
 q12
 k13
 .idea/
